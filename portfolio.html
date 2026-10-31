@@ -1,0 +1,1725 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" id="viewportMeta" content="width=1240, user-scalable=yes" />
+    <script>
+      (function() {
+        function enforceDesktopScale() {
+          var targetWidth = 1240;
+          var screenWidth = window.screen ? window.screen.width : window.innerWidth;
+          if (screenWidth && screenWidth < targetWidth) {
+            var scale = screenWidth / targetWidth;
+            var meta = document.getElementById('viewportMeta');
+            if (meta) {
+              meta.setAttribute('content', 'width=' + targetWidth + ', initial-scale=' + scale + ', maximum-scale=3.0, user-scalable=yes');
+            }
+          }
+        }
+        enforceDesktopScale();
+        window.addEventListener('resize', enforceDesktopScale);
+        window.addEventListener('orientationchange', enforceDesktopScale);
+      })();
+    </script>
+    <title>Portfolio — PEDITRO Visual Creator & Video Editor</title>
+    <meta
+      name="description"
+      content="Featured short form reels, commercial edits, retention-engineered storytelling and cinematic visuals by PEDITRO."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <style>
+      /* ----------------------------------------------------------------------
+         PORTFOLIO PAGE SPECIFIC STYLES
+         ---------------------------------------------------------------------- */
+      .portfolio-page-header {
+        position: fixed;
+        top: 16px;
+        left: 0;
+        right: 0;
+        z-index: 100;
+        pointer-events: none;
+      }
+
+      .portfolio-header-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        pointer-events: auto;
+        padding: 0 24px;
+        max-width: var(--max-width);
+        margin: 0 auto;
+        gap: 16px;
+      }
+
+      .portfolio-header-left {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .btn-pill-back {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 9px 18px;
+        background: rgba(18, 9, 34, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-pill);
+        color: var(--text-main);
+        font-weight: 600;
+        font-size: 0.9rem;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.25s ease;
+      }
+
+      .btn-pill-back:hover {
+        border-color: var(--purple-light);
+        background: rgba(38, 20, 68, 0.85);
+        color: #ffffff;
+        transform: translateX(-3px);
+        box-shadow: 0 0 20px var(--purple-glow);
+      }
+
+      .portfolio-header-center {
+        text-align: center;
+      }
+
+      .portfolio-page-title {
+        font-family: var(--font-script);
+        font-size: clamp(2.4rem, 4vw, 3.4rem);
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1;
+        margin: 0;
+        text-shadow: 0 0 30px rgba(168, 85, 247, 0.45);
+        transform: rotate(-1.5deg);
+      }
+
+      .portfolio-header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      /* Filter Dropdown Pill */
+      .filter-dropdown-wrapper {
+        position: relative;
+      }
+
+      .filter-dropdown-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 22px;
+        background: rgba(18, 9, 34, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-pill);
+        color: #ffffff;
+        font-weight: 600;
+        font-size: 0.88rem;
+        box-shadow: var(--shadow-sm);
+        transition: all 0.25s ease;
+      }
+
+      .filter-dropdown-btn:hover {
+        border-color: var(--purple-light);
+        box-shadow: 0 0 20px var(--purple-glow);
+      }
+
+      .filter-dropdown-menu {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        background: rgba(18, 9, 34, 0.95);
+        backdrop-filter: blur(30px);
+        -webkit-backdrop-filter: blur(30px);
+        border: 1px solid var(--border-glow);
+        border-radius: var(--radius-md);
+        padding: 8px;
+        min-width: 220px;
+        display: none;
+        flex-direction: column;
+        gap: 4px;
+        box-shadow: var(--shadow-lg);
+        z-index: 120;
+      }
+
+      .filter-dropdown-menu.show {
+        display: flex;
+        animation: fadeInDown 0.2s ease-out;
+      }
+
+      .filter-opt-btn {
+        padding: 10px 14px;
+        border-radius: var(--radius-sm);
+        text-align: left;
+        color: var(--text-muted);
+        font-size: 0.86rem;
+        font-weight: 500;
+        background: transparent;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .filter-opt-btn:hover,
+      .filter-opt-btn.active {
+        color: #ffffff;
+        background: rgba(168, 85, 247, 0.2);
+        font-weight: 600;
+      }
+
+      .filter-opt-btn.active::after {
+        content: "✓";
+        color: var(--purple-light);
+        font-weight: 800;
+      }
+
+      /* Portfolio Grid Main Container */
+      .portfolio-main-content {
+        padding-top: 120px;
+        padding-bottom: 40px;
+      }
+
+      .portfolio-video-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+        margin-top: 20px;
+        margin-bottom: 60px;
+      }
+
+      /* Admin Modal & Controls */
+      .admin-modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 1000;
+        background: rgba(8, 4, 18, 0.88);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .admin-modal-backdrop.open {
+        display: flex;
+        opacity: 1;
+      }
+
+      .admin-modal-container {
+        background: #120922;
+        border: 1px solid var(--purple-light);
+        box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px var(--purple-glow);
+        border-radius: 20px;
+        width: 100%;
+        max-width: 580px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 28px;
+        color: #ffffff;
+        position: relative;
+        animation: modalScaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .admin-modal-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        width: 34px;
+        height: 34px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .admin-modal-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: rotate(90deg);
+      }
+
+      .admin-header {
+        margin-bottom: 20px;
+        border-bottom: 1px solid var(--border-subtle);
+        padding-bottom: 14px;
+      }
+
+      .admin-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 4px 10px;
+        background: rgba(168, 85, 247, 0.2);
+        border: 1px solid var(--purple-light);
+        border-radius: var(--radius-pill);
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--purple-light);
+        text-transform: uppercase;
+        margin-bottom: 8px;
+      }
+
+      .admin-title {
+        font-size: 1.35rem;
+        font-weight: 800;
+        margin: 0;
+      }
+
+      .admin-form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 15px;
+      }
+
+      .admin-form-group label {
+        font-size: 0.84rem;
+        font-weight: 600;
+        color: var(--text-muted);
+      }
+
+      .admin-input,
+      .admin-select,
+      .admin-textarea {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        border-radius: 10px;
+        padding: 10px 14px;
+        color: #fff;
+        font-family: inherit;
+        font-size: 0.88rem;
+        transition: border-color 0.2s;
+        outline: none;
+      }
+
+      .admin-input:focus,
+      .admin-select:focus,
+      .admin-textarea:focus {
+        border-color: var(--purple-light);
+        background: rgba(255, 255, 255, 0.09);
+        box-shadow: 0 0 12px var(--purple-glow);
+      }
+
+      .admin-input-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+      }
+
+      .admin-helper-hint {
+        font-size: 0.74rem;
+        color: var(--text-muted);
+        margin-top: 2px;
+      }
+
+      .admin-btn-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      .admin-custom-list {
+        margin-top: 24px;
+        border-top: 1px solid var(--border-subtle);
+        padding-top: 18px;
+      }
+
+      .admin-list-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 14px;
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--border-subtle);
+        border-radius: 10px;
+        margin-bottom: 8px;
+        font-size: 0.86rem;
+      }
+
+      .admin-delete-btn {
+        background: rgba(239, 68, 68, 0.2);
+        border: 1px solid rgba(239, 68, 68, 0.4);
+        color: #fca5a5;
+        border-radius: 6px;
+        padding: 4px 10px;
+        font-size: 0.76rem;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+
+      .admin-delete-btn:hover {
+        background: rgba(239, 68, 68, 0.4);
+        color: #fff;
+      }
+
+      /* 9:16 Vertical Video Card */
+      .portfolio-video-card {
+        background: #0e061c;
+        border: 1px solid var(--border-subtle);
+        border-radius: 22px;
+        aspect-ratio: 9/16;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .portfolio-video-card:hover {
+        transform: translateY(-8px) scale(1.02);
+        border-color: var(--purple-light);
+        box-shadow:
+          0 20px 45px rgba(0, 0, 0, 0.7),
+          0 0 35px var(--purple-glow);
+      }
+
+      .video-card-media {
+        width: 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .video-card-media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+
+      .card-inline-video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        opacity: 0;
+        transition: opacity 0.35s ease;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .portfolio-video-card:hover .card-inline-video {
+        opacity: 1;
+      }
+
+      .portfolio-video-card:hover .video-card-media img {
+        transform: scale(1.06);
+      }
+
+      .video-card-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0.65) 0%,
+          transparent 35%,
+          transparent 60%,
+          rgba(9, 4, 18, 0.95) 100%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 18px;
+        z-index: 2;
+      }
+
+      .card-creator-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        background: rgba(0, 0, 0, 0.65);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        border-radius: var(--radius-pill);
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: #fff;
+        width: fit-content;
+      }
+
+      .creator-avatar {
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .video-center-play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.9);
+        width: 54px;
+        height: 54px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.92);
+        color: #090511;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        box-shadow:
+          0 10px 30px rgba(0, 0, 0, 0.6),
+          0 0 25px var(--purple-glow);
+        transition: all 0.3s ease;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .portfolio-video-card:hover .video-center-play {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .video-card-bottom-info {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .video-card-caption {
+        font-size: 0.98rem;
+        font-weight: 700;
+        color: #ffffff;
+        line-height: 1.35;
+      }
+
+      .video-card-tags {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.76rem;
+        color: var(--purple-light);
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Ambient Dynamic Purple Mesh Gradient Layer -->
+    <div class="bg-ambient-layer" aria-hidden="true">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+      <div class="ambient-orb orb-3"></div>
+      <div class="ambient-orb orb-4"></div>
+    </div>
+
+    <!-- ======================================================================
+       STICKY GLASS HEADER (MATCHING VIDEO)
+       ====================================================================== -->
+    <header class="portfolio-page-header">
+      <div class="portfolio-header-container">
+        <!-- Left: Back + Brand + Contact -->
+        <div class="portfolio-header-left">
+          <a
+            href="index.html#works"
+            class="btn-pill-back"
+            aria-label="Back to Home"
+          >
+            <span>←</span>
+            <span>Back</span>
+          </a>
+          <a href="index.html#home" class="brand-pill" aria-label="Home">
+            <img
+              src="DP.png"
+              alt="PEDITRO"
+              class="brand-avatar"
+              onerror="this.style.display = 'none'"
+            />
+            <span class="brand-dot"></span>
+            <span>PED<span style="color: var(--purple-light)">ITRO</span></span>
+          </a>
+          <a
+            href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-pill btn-primary header-contact-btn"
+            style="padding: 9px 20px; font-size: 0.88rem"
+          >
+            <span>Contact Me</span>
+          </a>
+        </div>
+
+        <!-- Center: Cursive "Portfolio" -->
+        <div class="portfolio-header-center">
+          <h1 class="portfolio-page-title">Portfolio</h1>
+        </div>
+
+        <!-- Right: Category Filter Dropdown + Hamburger -->
+        <div class="portfolio-header-right">
+          <div class="filter-dropdown-wrapper">
+            <button
+              class="filter-dropdown-btn"
+              id="filterDropdownBtn"
+              aria-expanded="false"
+            >
+              <span id="selectedFilterLabel">Short Form Videos</span>
+              <i class="fas fa-chevron-down" style="font-size: 0.75rem"></i>
+            </button>
+            <div class="filter-dropdown-menu" id="filterDropdownMenu">
+              <button class="filter-opt-btn active" data-filter="shorts">
+                Short Form Videos (<span id="filterCountShorts">6</span>)
+              </button>
+              <button class="filter-opt-btn" data-filter="all">
+                All Projects (<span id="filterCountAll">6</span>)
+              </button>
+            </div>
+          </div>
+
+          <button
+            class="hamburger-btn"
+            id="portfolioHamburgerBtn"
+            aria-label="Open Navigation Menu"
+            aria-expanded="false"
+          >
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+       FULLSCREEN GLASS DRAWER / MOBILE MENU
+       ====================================================================== -->
+    <div class="menu-drawer" id="menuDrawer" aria-hidden="true">
+      <div class="menu-drawer-content">
+        <nav class="menu-drawer-nav">
+          <a href="index.html#home" class="menu-drawer-link">Home</a>
+          <a href="index.html#showcase" class="menu-drawer-link">Showcase</a>
+          <a href="index.html#about" class="menu-drawer-link">About Me</a>
+          <a href="portfolio.html" class="menu-drawer-link" style="color: #fff"
+            >Portfolio</a
+          >
+          <a href="index.html#faq" class="menu-drawer-link">Questions & FAQ</a>
+          <a href="index.html#contact" class="menu-drawer-link"
+            >Let's Connect</a
+          >
+        </nav>
+
+        <div class="menu-drawer-contact">
+          <a
+            href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-pill btn-primary"
+            style="width: 100%; max-width: 280px"
+          >
+            <i class="fab fa-instagram"></i> DM on Instagram
+          </a>
+          <div class="menu-social-links">
+            <a
+              href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-circle-btn"
+              aria-label="Instagram"
+              title="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="mailto:peditro684@gmail.com"
+              class="social-circle-btn"
+              aria-label="Email"
+              title="Email"
+              ><i class="fas fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+       MAIN CONTENT: 3-COLUMN VERTICAL VIDEO REELS GRID
+       ====================================================================== -->
+    <main class="portfolio-main-content">
+      <div class="container">
+        <div class="portfolio-video-grid" id="portfolioGrid">
+          <!-- Card 1: Daniel Dalen Master Edit -->
+          <div
+            class="portfolio-video-card"
+            data-category="shorts"
+            onclick="
+              openVideoModal(
+                'Daniel Dalen Style Edit',
+                'High-pacing podcast reel with kinetic graphics and keyframe tracking.',
+                'video1.mp4',
+                true,
+              )
+            "
+          >
+            <div class="video-card-media">
+              <img src="thumb1.jpg" alt="Daniel Dalen Style Edit" />
+              <video
+                src="video1.mp4"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="card-inline-video"
+              ></video>
+              <div class="video-card-overlay">
+                <div class="card-creator-pill">
+                  <img
+                    src="DP.png"
+                    class="creator-avatar"
+                    alt="Avatar"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span>Daniel Dalen</span>
+                </div>
+                <div class="video-center-play">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div class="video-card-bottom-info">
+                  <h3 class="video-card-caption">
+                    "5 Editing Secrets That Double Audience Retention ⚡"
+                  </h3>
+                  <div class="video-card-tags">
+                    <span>Short Form</span>
+                    <span>•</span>
+                    <span>Viral Reel</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Joseph Creator Talking Head -->
+          <div
+            class="portfolio-video-card"
+            data-category="shorts"
+            onclick="
+              openVideoModal(
+                'Joseph Creator Edit',
+                'Talking head business storytelling with clean B-roll cutaways and subtitles.',
+                'video2.mp4',
+                true,
+              )
+            "
+          >
+            <div class="video-card-media">
+              <img src="thumb2.jpg" alt="Joseph Creator Edit" />
+              <video
+                src="video2.mp4"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="card-inline-video"
+              ></video>
+              <div class="video-card-overlay">
+                <div class="card-creator-pill">
+                  <img
+                    src="DP.png"
+                    class="creator-avatar"
+                    alt="Avatar"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span>Joseph</span>
+                </div>
+                <div class="video-center-play">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div class="video-card-bottom-info">
+                  <h3 class="video-card-caption">
+                    "If you keep getting up every day... You might be a
+                    little..."
+                  </h3>
+                  <div class="video-card-tags">
+                    <span>Podcast</span>
+                    <span>•</span>
+                    <span>Talking Head</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: One Community Niche Podcast -->
+          <div
+            class="portfolio-video-card"
+            data-category="shorts"
+            onclick="
+              openVideoModal(
+                'Creator Studio Podcast',
+                'Multi-camera podcast edit with dynamic zooms and sound hits.',
+                'video3.mp4',
+                true,
+              )
+            "
+          >
+            <div class="video-card-media">
+              <img src="thumb3.jpg" alt="Podcast Reel" />
+              <video
+                src="video3.mp4"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="card-inline-video"
+              ></video>
+              <div class="video-card-overlay">
+                <div class="card-creator-pill">
+                  <img
+                    src="DP.png"
+                    class="creator-avatar"
+                    alt="Avatar"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span>Creator Niche</span>
+                </div>
+                <div class="video-center-play">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div class="video-card-bottom-info">
+                  <h3 class="video-card-caption">
+                    "One community, one niche, one message that matters."
+                  </h3>
+                  <div class="video-card-tags">
+                    <span>Interview</span>
+                    <span>•</span>
+                    <span>Kinetic Subtitles</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: KSHMR Festival Bass Drop -->
+          <div
+            class="portfolio-video-card"
+            data-category="shorts"
+            onclick="
+              openVideoModal(
+                'KSHMR Arena Cinematic',
+                'Cinematic EDM festival recap with dynamic camera shakes and speed ramps.',
+                'video4.mp4',
+                true,
+              )
+            "
+          >
+            <div class="video-card-media">
+              <img src="thumb4.jpg" alt="KSHMR Arena Cinematic" />
+              <video
+                src="video4.mp4"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="card-inline-video"
+              ></video>
+              <div class="video-card-overlay">
+                <div class="card-creator-pill">
+                  <img
+                    src="DP.png"
+                    class="creator-avatar"
+                    alt="Avatar"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span>KSHMR</span>
+                </div>
+                <div class="video-center-play">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div class="video-card-bottom-info">
+                  <h3 class="video-card-caption">
+                    KSHMR Arena Tour • Tickets Live on BookMyShow
+                  </h3>
+                  <div class="video-card-tags">
+                    <span>Concert</span>
+                    <span>•</span>
+                    <span>Music Edit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 5: Chris Williamson / Modern Wisdom -->
+          <div
+            class="portfolio-video-card"
+            data-category="shorts"
+            onclick="
+              openVideoModal(
+                'Modern Wisdom Podcast Reel',
+                'Engaging talking head cut with seamless audio pacing, subtle zooms, and studio grade color grading.',
+                'video5.mp4',
+                true,
+              )
+            "
+          >
+            <div class="video-card-media">
+              <img src="thumb5.jpg" alt="Modern Wisdom Podcast Reel" />
+              <video
+                src="video5.mp4"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="card-inline-video"
+              ></video>
+              <div class="video-card-overlay">
+                <div class="card-creator-pill">
+                  <img
+                    src="DP.png"
+                    class="creator-avatar"
+                    alt="Avatar"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span>Chris Williamson</span>
+                </div>
+                <div class="video-center-play">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div class="video-card-bottom-info">
+                  <h3 class="video-card-caption">
+                    "The brutal truth about human motivation & success"
+                  </h3>
+                  <div class="video-card-tags">
+                    <span>Podcast</span>
+                    <span>•</span>
+                    <span>Talking Head</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 6: Kinetic Subtitles & Viral Retention Hook -->
+          <div
+            class="portfolio-video-card"
+            data-category="shorts"
+            onclick="
+              openVideoModal(
+                'Viral Hook & Kinetic Typography Reel',
+                'Dynamic animated captions, energetic pacing, and visual pattern interrupts engineered for 100%+ retention.',
+                'video6.mp4',
+                true,
+              )
+            "
+          >
+            <div class="video-card-media">
+              <img src="thumb6.jpg" alt="Viral Hook & Kinetic Typography Reel" />
+              <video
+                src="video6.mp4"
+                muted
+                loop
+                playsinline
+                preload="metadata"
+                class="card-inline-video"
+              ></video>
+              <div class="video-card-overlay">
+                <div class="card-creator-pill">
+                  <img
+                    src="DP.png"
+                    class="creator-avatar"
+                    alt="Avatar"
+                    onerror="this.style.display = 'none'"
+                  />
+                  <span>Creator Studio</span>
+                </div>
+                <div class="video-center-play">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div class="video-card-bottom-info">
+                  <h3 class="video-card-caption">
+                    "Mastering High-Retention Visual Hooks & Dynamic Typography 🚀"
+                  </h3>
+                  <div class="video-card-tags">
+                    <span>Short Form</span>
+                    <span>•</span>
+                    <span>Kinetic Edit</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+         "LET'S CONNECT" / FOOTER CTA SECTION (MATCHING VIDEO)
+         ==================================================================== -->
+      <section
+        class="section-wrapper"
+        id="contact"
+        style="padding-bottom: 30px"
+      >
+        <div class="container">
+          <div class="footer-cta-container">
+            <span class="footer-tag">— Available For Work —</span>
+            <h2 class="footer-giant-heading">Let's Connect</h2>
+            <p class="footer-subtext">
+              Feel free to contact me if you have any questions. I'm available
+              for new projects, channel retention audits, or just for chatting.
+            </p>
+
+            <div class="footer-cta-group">
+              <a
+                href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-pill btn-primary"
+                style="padding: 16px 38px; font-size: 1.05rem"
+              >
+                <i class="fab fa-instagram" style="font-size: 1.25rem"></i>
+                <span>Contact me: @peditro684</span>
+                <span class="arrow-icon">→</span>
+              </a>
+              <a
+                href="mailto:peditro684@gmail.com"
+                class="btn-pill btn-secondary"
+                style="padding: 16px 34px; font-size: 1.05rem"
+              >
+                <i class="fas fa-envelope" style="font-size: 1.15rem"></i>
+                <span>Email: peditro684@gmail.com</span>
+              </a>
+            </div>
+
+            <div class="footer-bottom-bar">
+              <div class="footer-copyright">© PEDITRO, 2026</div>
+
+              <div class="footer-socials">
+                <a
+                  href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social-circle-btn"
+                  aria-label="Instagram"
+                  title="Instagram"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a
+                  href="mailto:peditro684@gmail.com"
+                  class="social-circle-btn"
+                  aria-label="Email"
+                  title="Email"
+                >
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======================================================================
+       INTERACTIVE VIDEO LIGHTBOX MODAL
+       ====================================================================== -->
+    <div class="video-modal-backdrop" id="videoModal" aria-hidden="true">
+      <div class="video-modal-container">
+        <button
+          class="video-modal-close-btn"
+          id="videoModalClose"
+          aria-label="Close Video Modal"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="video-modal-player-wrapper" id="videoModalPlayerWrapper">
+          <iframe
+            class="video-modal-iframe"
+            id="videoModalIframe"
+            src=""
+            allow="autoplay; encrypted-media; fullscreen"
+            allowfullscreen
+          ></iframe>
+          <video
+            class="video-modal-html5-player"
+            id="videoModalVideoPlayer"
+            controls
+            playsinline
+            style="
+              display: none;
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              background: #000;
+            "
+          ></video>
+        </div>
+
+        <div class="video-modal-info">
+          <h3 class="video-modal-title" id="videoModalTitle">Project Title</h3>
+          <p class="video-modal-desc" id="videoModalDesc">
+            Project details and video editing description.
+          </p>
+          <div style="margin-top: 14px">
+            <a
+              href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-pill btn-primary"
+              style="padding: 10px 24px; font-size: 0.9rem"
+            >
+              <i class="fab fa-instagram"></i>
+              <span>DM on Instagram to Start</span>
+              <span class="arrow-icon">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+       HIDDEN ADMIN PORTFOLIO UPLOAD MODAL
+       Triggers: 
+       1. Triple-click on footer copyright "© PEDITRO, 2026"
+       2. Keyboard shortcut: Ctrl + Shift + A (or Cmd + Shift + A)
+       3. URL parameter: portfolio.html?admin=true
+       Default Secret PIN: peditro2026
+       ====================================================================== -->
+    <div class="admin-modal-backdrop" id="adminModal" aria-hidden="true">
+      <div class="admin-modal-container">
+        <button class="admin-modal-close" id="adminModalClose" aria-label="Close Admin Modal">
+          <i class="fas fa-times"></i>
+        </button>
+
+        <!-- PIN SCREEN (Shown if not logged in) -->
+        <div id="adminPinScreen">
+          <div class="admin-header">
+            <span class="admin-badge"><i class="fas fa-lock"></i> Protected Area</span>
+            <h2 class="admin-title">Admin Portfolio Portal</h2>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px; line-height: 1.5;">
+            Enter your admin PIN to manage and upload new portfolio video projects directly.
+          </p>
+          <div class="admin-form-group">
+            <label for="adminPinInput">Secret Admin PIN</label>
+            <input type="password" id="adminPinInput" class="admin-input" placeholder="Enter PIN (Default: peditro2026)" autocomplete="off" />
+            <div id="adminPinError" style="color: #f87171; font-size: 0.78rem; display: none; margin-top: 5px;">
+              Incorrect PIN. Please try again.
+            </div>
+          </div>
+          <div class="admin-btn-row">
+            <button class="btn-pill btn-primary" id="adminPinSubmit" style="padding: 10px 24px;">
+              <span>Unlock Admin Panel</span>
+              <span class="arrow-icon">→</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- UPLOAD SCREEN (Shown when PIN is verified) -->
+        <div id="adminUploadScreen" style="display: none;">
+          <div class="admin-header">
+            <span class="admin-badge"><i class="fas fa-sparkles"></i> Portfolio Manager</span>
+            <h2 class="admin-title">Upload Video Project</h2>
+          </div>
+
+          <form id="adminUploadForm" onsubmit="return false;">
+            <div class="admin-input-row">
+              <div class="admin-form-group">
+                <label for="adminCreatorName">Creator / Client Name *</label>
+                <input type="text" id="adminCreatorName" class="admin-input" placeholder="e.g. Daniel Dalen" required />
+              </div>
+              <div class="admin-form-group">
+                <label for="adminProjectTitle">Project Modal Title *</label>
+                <input type="text" id="adminProjectTitle" class="admin-input" placeholder="e.g. High Retention Hook Showcase" required />
+              </div>
+            </div>
+
+            <div class="admin-form-group">
+              <label for="adminCaption">Card Caption / Hook Quote *</label>
+              <input type="text" id="adminCaption" class="admin-input" placeholder='e.g. "5 Editing Secrets That Double Audience Retention ⚡"' required />
+            </div>
+
+            <div class="admin-form-group">
+              <label for="adminDesc">Detailed Project Description</label>
+              <textarea id="adminDesc" class="admin-textarea" rows="2" placeholder="Describe the edit style, retention pacing, and sound design..."></textarea>
+            </div>
+
+            <div class="admin-input-row">
+              <div class="admin-form-group">
+                <label for="adminCategory">Category</label>
+                <select id="adminCategory" class="admin-select">
+                  <option value="shorts">Short Form (9:16)</option>
+                  <option value="all">All Projects</option>
+                </select>
+              </div>
+              <div class="admin-form-group">
+                <label for="adminTags">Tags (separated by •)</label>
+                <input type="text" id="adminTags" class="admin-input" placeholder="Short Form • Viral Reel" />
+              </div>
+            </div>
+
+            <div class="admin-form-group">
+              <label>Video File or Source *</label>
+              <input type="file" id="adminVideoFileInput" class="admin-input" accept="video/mp4,video/webm" style="padding: 8px;" />
+              <div style="text-align: center; font-size: 0.74rem; color: var(--text-muted); margin: 4px 0;">— OR enter local filename / YouTube ID —</div>
+              <input type="text" id="adminVideoUrlInput" class="admin-input" placeholder="e.g. video7.mp4 or YouTube video ID" />
+              <span class="admin-helper-hint">Select a local MP4 video file or enter the video filename located in your project folder.</span>
+            </div>
+
+            <div class="admin-form-group">
+              <label>Poster Thumbnail Image (Optional)</label>
+              <input type="file" id="adminThumbFileInput" class="admin-input" accept="image/*" style="padding: 8px;" />
+              <div style="text-align: center; font-size: 0.74rem; color: var(--text-muted); margin: 4px 0;">— OR enter image filename —</div>
+              <input type="text" id="adminThumbUrlInput" class="admin-input" placeholder="e.g. thumb7.jpg" />
+            </div>
+
+            <div class="admin-btn-row">
+              <button type="submit" class="btn-pill btn-primary" id="adminSaveBtn" style="padding: 12px 28px;">
+                <i class="fas fa-plus-circle"></i>
+                <span>Publish to Portfolio</span>
+              </button>
+              <button type="button" class="btn-pill btn-secondary" id="adminLockBtn" style="padding: 12px 20px;">
+                <span>Lock Panel</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- List of custom uploaded projects -->
+          <div class="admin-custom-list">
+            <h4 style="font-size: 0.95rem; margin-bottom: 12px; font-weight: 700;">Uploaded Custom Projects</h4>
+            <div id="adminCustomItemsList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script>
+      // Global variable to keep track of custom projects stored in localStorage
+      const STORAGE_KEY = "peditro_custom_projects";
+      const ADMIN_PIN = "peditro2026";
+
+      function getStoredProjects() {
+        try {
+          const data = localStorage.getItem(STORAGE_KEY);
+          return data ? JSON.parse(data) : [];
+        } catch (e) {
+          console.error("Error reading localStorage:", e);
+          return [];
+        }
+      }
+
+      function saveStoredProjects(projects) {
+        try {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(projects));
+        } catch (e) {
+          console.error("Error writing to localStorage:", e);
+        }
+      }
+
+      function updateFilterCounts() {
+        const customProjects = getStoredProjects();
+        const baseCount = 6;
+        const total = baseCount + customProjects.length;
+        const shortsCount = baseCount + customProjects.filter(p => p.category === "shorts" || !p.category).length;
+
+        const countShortsEl = document.getElementById("filterCountShorts");
+        const countAllEl = document.getElementById("filterCountAll");
+        if (countShortsEl) countShortsEl.textContent = shortsCount;
+        if (countAllEl) countAllEl.textContent = total;
+      }
+
+      function renderCustomProjects() {
+        const grid = document.getElementById("portfolioGrid");
+        if (!grid) return;
+
+        // Remove any previously rendered custom cards
+        grid.querySelectorAll(".custom-injected-card").forEach(el => el.remove());
+
+        const projects = getStoredProjects();
+        projects.forEach((proj) => {
+          const card = document.createElement("div");
+          card.className = "portfolio-video-card custom-injected-card";
+          card.setAttribute("data-category", proj.category || "shorts");
+          card.setAttribute("data-id", proj.id);
+
+          const posterSrc = proj.poster || "thumb1.jpg";
+          const videoSrc = proj.video || "";
+
+          card.innerHTML = `
+            <div class="video-card-media">
+              <img src="${posterSrc}" alt="${proj.title || "Custom Edit"}" />
+              ${videoSrc ? `<video src="${videoSrc}" muted loop playsinline preload="metadata" class="card-inline-video"></video>` : ""}
+              <div class="video-card-overlay">
+                <div class="card-creator-pill">
+                  <img src="DP.png" class="creator-avatar" alt="Avatar" onerror="this.style.display='none'" />
+                  <span>${proj.creator || "PEDITRO"}</span>
+                </div>
+                <div class="video-center-play">
+                  <i class="fas fa-play"></i>
+                </div>
+                <div class="video-card-bottom-info">
+                  <h3 class="video-card-caption">${proj.caption || proj.title}</h3>
+                  <div class="video-card-tags">
+                    <span>${proj.tags || "Short Form • Viral Reel"}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          `;
+
+          card.addEventListener("click", () => {
+            openVideoModal(proj.title, proj.desc, videoSrc, true);
+          });
+
+          // Inline video hover playback
+          const vid = card.querySelector(".card-inline-video");
+          if (vid) {
+            card.addEventListener("mouseenter", () => vid.play().catch(() => {}));
+            card.addEventListener("mouseleave", () => {
+              vid.pause();
+              vid.currentTime = 0;
+            });
+          }
+
+          grid.appendChild(card);
+        });
+
+        updateFilterCounts();
+        renderAdminCustomList();
+      }
+
+      function renderAdminCustomList() {
+        const listEl = document.getElementById("adminCustomItemsList");
+        if (!listEl) return;
+
+        const projects = getStoredProjects();
+        if (projects.length === 0) {
+          listEl.innerHTML = `<p style="font-size:0.82rem; color:var(--text-muted);">No custom videos uploaded yet. Add one using the form above!</p>`;
+          return;
+        }
+
+        listEl.innerHTML = projects.map(p => `
+          <div class="admin-list-item">
+            <div>
+              <strong>${p.creator}:</strong> ${p.caption.substring(0, 35)}...
+              <div style="font-size:0.75rem; color:var(--text-muted);">${p.video}</div>
+            </div>
+            <button class="admin-delete-btn" onclick="deleteCustomProject('${p.id}')">Delete</button>
+          </div>
+        `).join("");
+      }
+
+      window.deleteCustomProject = function(id) {
+        if (!confirm("Are you sure you want to remove this video from your portfolio?")) return;
+        let projects = getStoredProjects();
+        projects = projects.filter(p => p.id !== id);
+        saveStoredProjects(projects);
+        renderCustomProjects();
+      };
+
+      document.addEventListener("DOMContentLoaded", () => {
+        // Render custom stored projects on load
+        renderCustomProjects();
+
+        // Dropdown toggle
+        const dropdownBtn = document.getElementById("filterDropdownBtn");
+        const dropdownMenu = document.getElementById("filterDropdownMenu");
+        const filterLabel = document.getElementById("selectedFilterLabel");
+        const filterBtns = document.querySelectorAll(".filter-opt-btn");
+
+        if (dropdownBtn && dropdownMenu) {
+          dropdownBtn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            const isOpen = dropdownMenu.classList.contains("show");
+            dropdownMenu.classList.toggle("show");
+            dropdownBtn.setAttribute("aria-expanded", !isOpen);
+          });
+
+          document.addEventListener("click", (e) => {
+            if (
+              !dropdownBtn.contains(e.target) &&
+              !dropdownMenu.contains(e.target)
+            ) {
+              dropdownMenu.classList.remove("show");
+              dropdownBtn.setAttribute("aria-expanded", "false");
+            }
+          });
+
+          filterBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+              filterBtns.forEach((b) => b.classList.remove("active"));
+              btn.classList.add("active");
+
+              const selectedFilter = btn.getAttribute("data-filter");
+              filterLabel.textContent = btn.childNodes[0].textContent.trim();
+              dropdownMenu.classList.remove("show");
+              dropdownBtn.setAttribute("aria-expanded", "false");
+
+              const allCards = document.querySelectorAll(".portfolio-video-card");
+              allCards.forEach((card) => {
+                const cardCat = card.getAttribute("data-category");
+                if (selectedFilter === "all" || selectedFilter === cardCat) {
+                  card.style.display = "flex";
+                  setTimeout(() => {
+                    card.style.opacity = "1";
+                    card.style.transform = "translateY(0) scale(1)";
+                  }, 30);
+                } else {
+                  card.style.opacity = "0";
+                  card.style.transform = "translateY(15px) scale(0.96)";
+                  setTimeout(() => {
+                    card.style.display = "none";
+                  }, 200);
+                }
+              });
+            });
+          });
+        }
+
+        // Mobile Drawer toggle
+        const hamburgerBtn = document.getElementById("portfolioHamburgerBtn");
+        const menuDrawer = document.getElementById("menuDrawer");
+        const menuLinks = document.querySelectorAll(".menu-drawer-link");
+
+        function toggleMenu() {
+          const isOpen = menuDrawer.classList.contains("open");
+          if (isOpen) {
+            menuDrawer.classList.remove("open");
+            hamburgerBtn.classList.remove("open");
+            hamburgerBtn.setAttribute("aria-expanded", "false");
+            menuDrawer.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+          } else {
+            menuDrawer.classList.add("open");
+            hamburgerBtn.classList.add("open");
+            hamburgerBtn.setAttribute("aria-expanded", "true");
+            menuDrawer.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+          }
+        }
+
+        if (hamburgerBtn && menuDrawer) {
+          hamburgerBtn.addEventListener("click", toggleMenu);
+          menuLinks.forEach((link) =>
+            link.addEventListener("click", toggleMenu),
+          );
+          document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && menuDrawer.classList.contains("open")) {
+              toggleMenu();
+            }
+          });
+        }
+
+        // Hover video playback on base portfolio cards
+        document.querySelectorAll(".portfolio-video-card").forEach((card) => {
+          const vid = card.querySelector(".card-inline-video");
+          if (vid) {
+            card.addEventListener("mouseenter", () =>
+              vid.play().catch(() => {}),
+            );
+            card.addEventListener("mouseleave", () => {
+              vid.pause();
+              vid.currentTime = 0;
+            });
+          }
+        });
+
+        // ----------------------------------------------------------------------
+        // ADMIN PANEL LOGIC & SECRET TRIGGERS
+        // ----------------------------------------------------------------------
+        const adminModal = document.getElementById("adminModal");
+        const adminModalClose = document.getElementById("adminModalClose");
+        const pinScreen = document.getElementById("adminPinScreen");
+        const uploadScreen = document.getElementById("adminUploadScreen");
+        const pinInput = document.getElementById("adminPinInput");
+        const pinSubmit = document.getElementById("adminPinSubmit");
+        const pinError = document.getElementById("adminPinError");
+        const adminLockBtn = document.getElementById("adminLockBtn");
+        const adminSaveBtn = document.getElementById("adminSaveBtn");
+
+        function openAdminModal() {
+          if (!adminModal) return;
+          adminModal.classList.add("open");
+          adminModal.setAttribute("aria-hidden", "false");
+          document.body.style.overflow = "hidden";
+
+          // Check if session is already authenticated
+          if (sessionStorage.getItem("peditro_admin_auth") === "true") {
+            pinScreen.style.display = "none";
+            uploadScreen.style.display = "block";
+            renderAdminCustomList();
+          } else {
+            pinScreen.style.display = "block";
+            uploadScreen.style.display = "none";
+            if (pinInput) {
+              pinInput.value = "";
+              setTimeout(() => pinInput.focus(), 150);
+            }
+          }
+        }
+
+        function closeAdminModal() {
+          if (!adminModal) return;
+          adminModal.classList.remove("open");
+          adminModal.setAttribute("aria-hidden", "true");
+          document.body.style.overflow = "";
+        }
+
+        if (adminModalClose) {
+          adminModalClose.addEventListener("click", closeAdminModal);
+        }
+        if (adminModal) {
+          adminModal.addEventListener("click", (e) => {
+            if (e.target === adminModal) closeAdminModal();
+          });
+        }
+
+        // Secret Trigger 1: Triple click on copyright in footer
+        const copyrightEl = document.querySelector(".footer-copyright");
+        let clickCount = 0;
+        let clickTimer = null;
+        if (copyrightEl) {
+          copyrightEl.style.cursor = "pointer";
+          copyrightEl.setAttribute("title", "Triple-click for Admin Access");
+          copyrightEl.addEventListener("click", () => {
+            clickCount++;
+            clearTimeout(clickTimer);
+            if (clickCount >= 3) {
+              clickCount = 0;
+              openAdminModal();
+            } else {
+              clickTimer = setTimeout(() => {
+                clickCount = 0;
+              }, 600);
+            }
+          });
+        }
+
+        // Secret Trigger 2: Keyboard shortcut Ctrl + Shift + A
+        document.addEventListener("keydown", (e) => {
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === "A" || e.key === "a")) {
+            e.preventDefault();
+            openAdminModal();
+          }
+        });
+
+        // Secret Trigger 3: URL Parameter ?admin=true
+        if (window.location.search.includes("admin=true")) {
+          setTimeout(openAdminModal, 300);
+        }
+
+        // PIN Verification
+        function verifyPin() {
+          if (!pinInput) return;
+          if (pinInput.value === ADMIN_PIN) {
+            sessionStorage.setItem("peditro_admin_auth", "true");
+            if (pinError) pinError.style.display = "none";
+            pinScreen.style.display = "none";
+            uploadScreen.style.display = "block";
+            renderAdminCustomList();
+          } else {
+            if (pinError) pinError.style.display = "block";
+            pinInput.focus();
+            pinInput.select();
+          }
+        }
+
+        if (pinSubmit) {
+          pinSubmit.addEventListener("click", verifyPin);
+        }
+        if (pinInput) {
+          pinInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") verifyPin();
+          });
+        }
+
+        if (adminLockBtn) {
+          adminLockBtn.addEventListener("click", () => {
+            sessionStorage.removeItem("peditro_admin_auth");
+            closeAdminModal();
+          });
+        }
+
+        // Handle Add Project Form Submission
+        if (adminSaveBtn) {
+          adminSaveBtn.addEventListener("click", () => {
+            const creator = document.getElementById("adminCreatorName").value.trim();
+            const title = document.getElementById("adminProjectTitle").value.trim();
+            const caption = document.getElementById("adminCaption").value.trim();
+            const desc = document.getElementById("adminDesc").value.trim();
+            const category = document.getElementById("adminCategory").value;
+            const tags = document.getElementById("adminTags").value.trim() || "Short Form • Viral Reel";
+
+            const videoFile = document.getElementById("adminVideoFileInput").files[0];
+            const videoUrl = document.getElementById("adminVideoUrlInput").value.trim();
+
+            const thumbFile = document.getElementById("adminThumbFileInput").files[0];
+            const thumbUrl = document.getElementById("adminThumbUrlInput").value.trim();
+
+            if (!creator || !title || !caption) {
+              alert("Please fill in Creator Name, Project Title, and Card Caption.");
+              return;
+            }
+
+            let finalVideo = videoUrl;
+            if (videoFile) {
+              finalVideo = URL.createObjectURL(videoFile);
+            }
+
+            if (!finalVideo) {
+              alert("Please select a video file or enter a video filename (e.g. video7.mp4).");
+              return;
+            }
+
+            let finalThumb = thumbUrl || "thumb1.jpg";
+            if (thumbFile) {
+              finalThumb = URL.createObjectURL(thumbFile);
+            }
+
+            const newProject = {
+              id: "proj_" + Date.now(),
+              creator,
+              title,
+              caption,
+              desc: desc || "Custom video showcase edit.",
+              category,
+              tags,
+              video: finalVideo,
+              poster: finalThumb
+            };
+
+            const projects = getStoredProjects();
+            projects.push(newProject);
+            saveStoredProjects(projects);
+
+            renderCustomProjects();
+
+            // Clear form
+            document.getElementById("adminUploadForm").reset();
+            alert("Project published successfully to portfolio.html!");
+            closeAdminModal();
+          });
+        }
+      });
+
+      // Video Lightbox Modal functions
+      function openVideoModal(title, desc, videoSource, isVertical = false) {
+        const modal = document.getElementById("videoModal");
+        const iframe = document.getElementById("videoModalIframe");
+        const videoPlayer = document.getElementById("videoModalVideoPlayer");
+        const titleEl = document.getElementById("videoModalTitle");
+        const descEl = document.getElementById("videoModalDesc");
+        const wrapper = document.getElementById("videoModalPlayerWrapper");
+        const container = modal
+          ? modal.querySelector(".video-modal-container")
+          : null;
+
+        if (!modal) return;
+
+        if (titleEl) titleEl.textContent = title || "Featured Project";
+        if (descEl) descEl.textContent = desc || "Video editing showcase.";
+
+        if (isVertical) {
+          if (wrapper) wrapper.classList.add("is-vertical");
+          if (container) container.classList.add("modal-is-vertical");
+        } else {
+          if (wrapper) wrapper.classList.remove("is-vertical");
+          if (container) container.classList.remove("modal-is-vertical");
+        }
+
+        const isLocalMp4 =
+          typeof videoSource === "string" &&
+          (videoSource.endsWith(".mp4") || videoSource.includes(".mp4") || videoSource.startsWith("blob:"));
+
+        if (isLocalMp4) {
+          if (iframe) {
+            iframe.style.display = "none";
+            iframe.src = "";
+          }
+          if (videoPlayer) {
+            videoPlayer.style.display = "block";
+            videoPlayer.src = videoSource;
+            videoPlayer.currentTime = 0;
+            videoPlayer.play().catch(() => {});
+          }
+        } else {
+          if (videoPlayer) {
+            videoPlayer.pause();
+            videoPlayer.style.display = "none";
+            videoPlayer.src = "";
+          }
+          if (iframe) {
+            iframe.style.display = "block";
+            iframe.src = `https://www.youtube.com/embed/${videoSource}?autoplay=1&modestbranding=1&rel=0&playsinline=1`;
+          }
+        }
+
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeVideoModal() {
+        const modal = document.getElementById("videoModal");
+        const iframe = document.getElementById("videoModalIframe");
+        const videoPlayer = document.getElementById("videoModalVideoPlayer");
+        if (!modal) return;
+
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        if (iframe) iframe.src = "";
+        if (videoPlayer) {
+          videoPlayer.pause();
+          videoPlayer.src = "";
+        }
+        document.body.style.overflow = "";
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const closeBtn = document.getElementById("videoModalClose");
+        const modal = document.getElementById("videoModal");
+
+        if (closeBtn) closeBtn.addEventListener("click", closeVideoModal);
+        if (modal) {
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal) closeVideoModal();
+          });
+        }
+
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && modal && modal.classList.contains("open")) {
+            closeVideoModal();
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

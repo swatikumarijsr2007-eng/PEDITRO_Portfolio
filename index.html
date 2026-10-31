@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" id="viewportMeta" content="width=1240, user-scalable=yes" />
+    <script>
+      (function() {
+        function enforceDesktopScale() {
+          var targetWidth = 1240;
+          var screenWidth = window.screen ? window.screen.width : window.innerWidth;
+          var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+          if ((screenWidth && screenWidth < targetWidth) || isTouch) {
+            document.documentElement.classList.add('is-mobile-device');
+          }
+          if (screenWidth && screenWidth < targetWidth) {
+            var scale = screenWidth / targetWidth;
+            var meta = document.getElementById('viewportMeta');
+            if (meta) {
+              meta.setAttribute('content', 'width=' + targetWidth + ', initial-scale=' + scale + ', maximum-scale=3.0, user-scalable=yes');
+            }
+          }
+        }
+        enforceDesktopScale();
+        window.addEventListener('resize', enforceDesktopScale);
+        window.addEventListener('orientationchange', enforceDesktopScale);
+      })();
+    </script>
+    <title>PEDITRO - a video editor</title>
+    <meta
+      name="description"
+      content="High-impact video editing, viral short-form reels, cinematic color grading, and retention-engineered editing for creators and visionary brands."
+    />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@500;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Ambient Dynamic Purple Mesh Gradient Layer -->
+    <div class="bg-ambient-layer" aria-hidden="true">
+      <div class="ambient-orb orb-1"></div>
+      <div class="ambient-orb orb-2"></div>
+      <div class="ambient-orb orb-3"></div>
+      <div class="ambient-orb orb-4"></div>
+    </div>
+
+    <!-- ======================================================================
+       STICKY FLOATING GLASS HEADER
+       ====================================================================== -->
+    <header class="site-header" id="siteHeader">
+      <div class="container header-inner">
+        <!-- Left Brand Pill -->
+        <a href="#home" class="brand-pill" id="brandPill" aria-label="Home">
+          <img
+            src="DP.png"
+            alt="PEDITRO"
+            class="brand-avatar"
+            onerror="this.style.display = 'none'"
+          />
+          <span class="brand-dot"></span>
+          <span>PED<span style="color: var(--purple-light)">ITRO</span></span>
+        </a>
+        <!-- Right Action Controls -->
+        <div class="header-actions">
+          <!-- Circular Hamburger Button -->
+          <button
+            class="hamburger-btn"
+            id="hamburgerBtn"
+            aria-label="Open Navigation Menu"
+            aria-expanded="false"
+          >
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ======================================================================
+       FULLSCREEN GLASS DRAWER / MOBILE MENU
+       ====================================================================== -->
+    <div class="menu-drawer" id="menuDrawer" aria-hidden="true">
+      <div class="menu-drawer-content">
+        <nav class="menu-drawer-nav">
+          <a href="#home" class="menu-drawer-link">Home</a>
+          <a href="#showcase" class="menu-drawer-link">Showcase</a>
+          <a href="#about" class="menu-drawer-link">About Me</a>
+          <a href="portfolio.html" class="menu-drawer-link">Portfolio</a>
+          <a href="#faq" class="menu-drawer-link">Questions & FAQ</a>
+          <a href="#contact" class="menu-drawer-link">Let's Connect</a>
+        </nav>
+
+        <div class="menu-drawer-contact">
+          <a
+            href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-pill btn-primary"
+            style="width: 100%; max-width: 280px"
+          >
+            CONTACT ME
+          </a>
+          <div class="menu-social-links">
+            <a
+              href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="social-circle-btn"
+              aria-label="Instagram"
+              title="Instagram"
+              ><i class="fab fa-instagram"></i
+            ></a>
+            <a
+              href="mailto:peditro684@gmail.com"
+              class="social-circle-btn"
+              aria-label="Email"
+              title="Email"
+              ><i class="fas fa-envelope"></i
+            ></a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <main>
+      <!-- ====================================================================
+         HERO SECTION
+         ==================================================================== -->
+      <section class="hero-section" id="home">
+        <div
+          class="container"
+          style="display: flex; flex-direction: column; align-items: center"
+        >
+          <!-- Status Indicator Pill -->
+          <div class="status-pill">
+            <span class="status-indicator-dot"></span>
+            <span>Available for work</span>
+          </div>
+
+          <!-- Handwritten Signature Script -->
+          <h2 class="hero-script-name">PEDITRO</h2>
+
+          <!-- Giant Bold Main Title -->
+          <h1 class="hero-headline">Visual Creator</h1>
+
+          <!-- Crisp Subtitle -->
+          <p class="hero-subtitle">
+            I help businesses, visionary brands, and ambitious creators turn raw
+            ideas into high-impact videos that capture immediate attention and
+            drive real results.
+          </p>
+
+          <!-- Instagram DM Button -->
+          <div class="hero-cta-group">
+            <a
+              href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-pill btn-primary"
+              style="padding: 16px 38px; font-size: 1.05rem"
+            >
+              <i class="fab fa-instagram" style="font-size: 1.25rem"></i>
+              <span>CONTACT ME</span>
+              <span class="arrow-icon">→</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+         INFINITE MARQUEE TICKER (MOBILE & DESKTOP HARDWARE-ACCELERATED)
+         ==================================================================== -->
+      <div class="marquee-strip" aria-hidden="true">
+        <div class="marquee-track">
+          <span class="marquee-item">VIRAL REELS & SHORTS</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">RETENTION EDITING</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">CINEMATIC COLOR GRADE</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">MOTION GRAPHICS</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">STUDIO SOUND & SFX</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">HOOK OPTIMIZATION</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">HIGH-PACING FLOW</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">4K PRORES 422HQ</span>
+          <span class="marquee-star">✦</span>
+          <!-- Seamless Loop Duplicate -->
+          <span class="marquee-item">VIRAL REELS & SHORTS</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">RETENTION EDITING</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">CINEMATIC COLOR GRADE</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">MOTION GRAPHICS</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">STUDIO SOUND & SFX</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">HOOK OPTIMIZATION</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">HIGH-PACING FLOW</span>
+          <span class="marquee-star">✦</span>
+          <span class="marquee-item">4K PRORES 422HQ</span>
+          <span class="marquee-star">✦</span>
+        </div>
+      </div>
+
+      <!-- ====================================================================
+         THE VISUAL SHOWCASE BENTO GRID
+         ==================================================================== -->
+      <section class="section-wrapper" id="showcase">
+        <div class="container">
+          <div class="showcase-container" id="showcaseBox">
+            <!-- Custom Interactive Follower Cursor Badge / Button -->
+            <a
+              href="#portfolioMasterCard"
+              class="showcase-cursor-badge"
+              id="showcaseCursor"
+              aria-label="See Recent Work — Explore my Portfolio"
+            >
+              <span class="cursor-pill"
+                >See Recent Work <span class="arrow-icon">→</span></span
+              >
+              <div class="cursor-circle">
+                <i class="fas fa-folder-open"></i>
+              </div>
+            </a>
+
+            <div class="bento-grid">
+              <!-- Card 1: Viral Reel Hooks & Attention Capture (Span 7) -->
+              <div class="bento-card card-span-7">
+                <div class="bento-card-header">
+                  <div>
+                    <span class="bento-tag"
+                      ><i class="fas fa-fire"></i> Viral Engineering</span
+                    >
+                    <h3 class="bento-title" style="margin-top: 8px">
+                      Hook Optimization & Pacing
+                    </h3>
+                  </div>
+                </div>
+                <p class="bento-desc">
+                  The first 3 seconds decide whether viewers stay or scroll
+                  away. Every cut, sound hit, and text pop is micro-timed to
+                  maximize viewer retention.
+                </p>
+                <div class="reel-mockup-frame">
+                  <img
+                    src="assets/reels_fitness.jpg"
+                    alt="Viral Hook Reel Mockup"
+                  />
+                  <div class="reel-overlay-content">
+                    <div class="reel-stat-badges">
+                      <span class="reel-badge-pill"
+                        ><i class="fas fa-eye"></i> 1.4M</span
+                      >
+                      <span class="reel-badge-pill"
+                        ><i class="fas fa-heart"></i> 94K</span
+                      >
+                      <span class="reel-badge-pill"
+                        ><i class="fas fa-share"></i> 12.8K</span
+                      >
+                    </div>
+                    <div class="reel-hook-text">
+                      "5 Editing Secrets That Double Audience Retention ⚡"
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 2: Pro Editing Suite & Multi-Track Audio Design (Span 5) -->
+              <div class="bento-card card-span-5">
+                <div class="bento-card-header">
+                  <div>
+                    <span class="bento-tag"
+                      ><i class="fas fa-sliders-h"></i> Timeline Master</span
+                    >
+                    <h3 class="bento-title" style="margin-top: 8px">
+                      Studio-Grade Timeline
+                    </h3>
+                  </div>
+                </div>
+                <p class="bento-desc">
+                  Multi-layer audio soundscapes, custom whooshes, riser impacts,
+                  and dynamic speed ramps.
+                </p>
+                <div class="timeline-mockup">
+                  <div class="timeline-header-bar">
+                    <span
+                      ><i
+                        class="fas fa-play"
+                        style="color: var(--purple-light)"
+                      ></i>
+                      00:01:24:18</span
+                    >
+                    <span>4K PRORES 422HQ</span>
+                  </div>
+                  <div class="timeline-track">
+                    <div class="timeline-clip clip-video">A-ROLL • 4K</div>
+                    <div class="timeline-clip clip-fx">B-ROLL OVERLAY</div>
+                  </div>
+                  <div class="timeline-track">
+                    <div class="timeline-clip clip-fx" style="width: 70%">
+                      KINETIC SUBTITLES & 3D VFX
+                    </div>
+                  </div>
+                  <div class="timeline-track">
+                    <div class="timeline-clip clip-audio">
+                      VOICE & EQ MASTER
+                    </div>
+                    <div class="timeline-clip clip-sfx">RISER SFX</div>
+                  </div>
+                  <div class="timeline-track">
+                    <div class="timeline-clip clip-sfx" style="width: 80%">
+                      CINEMATIC BRAAM & FOLEY
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 3: Interactive Before / After Color Grading Comparison Slider (Span 6) -->
+              <div class="bento-card card-span-6">
+                <div class="bento-card-header">
+                  <div>
+                    <span class="bento-tag"
+                      ><i class="fas fa-palette"></i> Color Science</span
+                    >
+                    <h3 class="bento-title" style="margin-top: 8px">
+                      Before & After Color Grading
+                    </h3>
+                  </div>
+                </div>
+                <p class="bento-desc">
+                  Drag the slider below to see flat RAW log footage transformed
+                  into rich, cinematic color grading.
+                </p>
+
+                <!-- Interactive Split Slider -->
+                <div class="before-after-wrapper" id="colorGradeSlider">
+                  <!-- Graded / After image -->
+                  <img
+                    src="assets/wedding_graded.jpg"
+                    alt="Graded Cinematic Footage"
+                    class="ba-image"
+                  />
+                  <span class="ba-label ba-label-before">Log Raw</span>
+
+                  <!-- Raw Flat / Before clip overlay with filter -->
+                  <div class="ba-after" id="baAfterLayer">
+                    <img
+                      src="assets/wedding_graded.jpg"
+                      alt="Raw Log Footage"
+                      class="ba-image"
+                      style="
+                        filter: saturate(0.2) contrast(0.7) brightness(1.15);
+                      "
+                    />
+                    <span class="ba-label ba-label-after">Cinematic Grade</span>
+                  </div>
+
+                  <!-- Slider Divider Line & Draggable Handle -->
+                  <div class="ba-slider-line" id="baLine"></div>
+                  <div class="ba-slider-handle" id="baHandle">
+                    <i class="fas fa-arrows-alt-h"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card 4: Audience Retention Analytics (Span 6) -->
+              <div class="bento-card card-span-6">
+                <div class="bento-card-header">
+                  <div>
+                    <span class="bento-tag"
+                      ><i class="fas fa-chart-line"></i> Analytics Driven</span
+                    >
+                    <h3 class="bento-title" style="margin-top: 8px">
+                      Proven Viewer Retention
+                    </h3>
+                  </div>
+                </div>
+                <p class="bento-desc">
+                  Strategic pacing cuts keep the viewer graph consistently high
+                  with zero drop-off through the payoff.
+                </p>
+
+                <div class="retention-chart-box">
+                  <svg
+                    class="chart-svg"
+                    viewBox="0 0 500 120"
+                    preserveAspectRatio="none"
+                  >
+                    <defs>
+                      <linearGradient
+                        id="peditroGlow"
+                        x1="0"
+                        y1="0"
+                        x2="0"
+                        y2="1"
+                      >
+                        <stop
+                          offset="0%"
+                          stop-color="#c084fc"
+                          stop-opacity="0.5"
+                        />
+                        <stop
+                          offset="100%"
+                          stop-color="#7c3aed"
+                          stop-opacity="0.0"
+                        />
+                      </linearGradient>
+                    </defs>
+                    <!-- Baseline Grid -->
+                    <line
+                      x1="0"
+                      y1="30"
+                      x2="500"
+                      y2="30"
+                      stroke="rgba(255,255,255,0.06)"
+                      stroke-dasharray="4"
+                    />
+                    <line
+                      x1="0"
+                      y1="70"
+                      x2="500"
+                      y2="70"
+                      stroke="rgba(255,255,255,0.06)"
+                      stroke-dasharray="4"
+                    />
+
+                    <!-- Average Video Line (drops fast) -->
+                    <path
+                      d="M 0,35 Q 80,85 200,95 T 500,105"
+                      fill="none"
+                      stroke="#64748b"
+                      stroke-width="2"
+                      stroke-dasharray="6"
+                    />
+
+                    <!-- Piku Retention Line (holds strong at 80%+) -->
+                    <path
+                      d="M 0,25 Q 120,28 250,34 T 500,42 L 500,120 L 0,120 Z"
+                      fill="url(#peditroGlow)"
+                    />
+                    <path
+                      d="M 0,25 Q 120,28 250,34 T 500,42"
+                      fill="none"
+                      stroke="#c084fc"
+                      stroke-width="3.5"
+                    />
+                  </svg>
+
+                  <div class="chart-legend">
+                    <div class="legend-item">
+                      <span class="legend-dot-peditro"></span>
+                      <strong style="color: #fff"
+                        >PEDITRO's Edit (82% Avg Retention)</strong
+                      >
+                    </div>
+                    <div class="legend-item">
+                      <span class="legend-dot-avg"></span>
+                      <span>Industry Avg (34%)</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+         "HELLO!" / ABOUT SECTION WITH DRAGGABLE SKILL PHYSICS BADGES
+         ==================================================================== -->
+      <section class="section-wrapper about-section" id="about">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">Hello!</span>
+          </div>
+
+          <div class="manifesto-container" id="manifestoArea">
+            <!-- Interactive Touch & Drag Hint Pill -->
+
+            <!-- Large Engaging Manifesto Text -->
+            <p class="manifesto-text">
+              I'm <span class="highlight">PIKU DAS</span>, a skilled and
+              creative video editor helping brands and creators turn raw footage
+              into engaging, high-impact content. I focus on
+              <span class="highlight">clean edits</span>,
+              <span class="highlight">strong pacing</span>, and visuals that
+              connect with audiences and deliver
+              <span class="highlight">real results</span>.
+            </p>
+
+            <!-- Interactive Draggable Skill Physics Badges (Framer Inspired!) -->
+            <div class="draggable-badge badge-orange badge-pos-1" id="badge1">
+              <span class="badge-icon"><i class="fas fa-th-large"></i></span>
+              <span>Video Editor</span>
+            </div>
+
+            <div class="draggable-badge badge-green badge-pos-2" id="badge2">
+              <span class="badge-icon"><i class="fas fa-wave-square"></i></span>
+              <span>Motion Designer</span>
+            </div>
+
+            <div class="draggable-badge badge-blue badge-pos-3" id="badge3">
+              <span class="badge-icon"><i class="fas fa-search"></i></span>
+              <span>Research</span>
+            </div>
+
+            <div class="draggable-badge badge-yellow badge-pos-4" id="badge4">
+              <span class="badge-icon"><i class="fas fa-chart-pie"></i></span>
+              <span>Trends</span>
+            </div>
+
+            <div class="draggable-badge badge-magenta badge-pos-5" id="badge5">
+              <span class="badge-icon"><i class="fas fa-bolt"></i></span>
+              <span>Viral Retention</span>
+            </div>
+
+            <div class="draggable-badge badge-purple badge-pos-6" id="badge6">
+              <span class="badge-icon"><i class="fas fa-paint-brush"></i></span>
+              <span>Color Grading</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+         "RECENT WORKS" / FEATURED PORTFOLIO SECTION
+         ==================================================================== -->
+      <section class="section-wrapper" id="works">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">My Projects</span>
+            <h2 class="section-title-cursive">Recent Works</h2>
+          </div>
+
+          <!-- Master Portfolio Showcase Card (Matching Framer Layout) -->
+          <div class="portfolio-master-card" id="portfolioMasterCard">
+            <a
+              href="portfolio.html"
+              class="portfolio-header-content"
+              aria-label="Explore my Portfolio - View selected projects"
+            >
+              <div class="explore-subhead">
+                <svg class="curved-arrow" viewBox="0 0 50 30" fill="none">
+                  <path
+                    d="M 5,20 Q 25,5 45,15 M 35,8 L 46,15 L 36,24"
+                    stroke="currentColor"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <span>Explore my</span>
+              </div>
+
+              <h3 class="portfolio-giant-title">
+                PORTFOLIO
+                <span class="sparkle-icon">✦</span>
+                <div class="title-brush-underline"></div>
+              </h3>
+
+              <div class="view-selected-wrapper">
+                <span class="view-selected-text">
+                  <span>View selected projects</span>
+                  <span class="arrow-icon">→</span>
+                </span>
+              </div>
+            </a>
+
+            <!-- 4 Vertical Video Reel Cards (9:16) - Photos Only, Tapping opens Portfolio -->
+            <div class="reels-preview-grid">
+              <!-- Reel 1: Viral Retention Hook -->
+              <a
+                href="portfolio.html"
+                class="reel-card"
+                aria-label="Viral Retention Hook - View in Portfolio"
+              >
+                <img
+                  src="thumb1.jpg"
+                  alt="Viral Retention Hook"
+                  class="reel-thumbnail-img"
+                />
+                <div class="reel-play-circle"><i class="fas fa-play"></i></div>
+                <div class="reel-play-overlay">
+                  <span class="reel-card-tag">Short Form • Viral</span>
+                  <h4 class="reel-card-title">Viral Retention Hook</h4>
+                </div>
+              </a>
+
+              <!-- Reel 2: Business Litmus Test -->
+              <a
+                href="portfolio.html"
+                class="reel-card"
+                aria-label="Business Litmus Test - View in Portfolio"
+              >
+                <img
+                  src="thumb2.jpg"
+                  alt="Business Litmus Test"
+                  class="reel-thumbnail-img"
+                />
+                <div class="reel-play-circle"><i class="fas fa-play"></i></div>
+                <div class="reel-play-overlay">
+                  <span class="reel-card-tag">Talking Head • Story</span>
+                  <h4 class="reel-card-title">Business Litmus Test</h4>
+                </div>
+              </a>
+
+              <!-- Reel 3: High-Energy Kinetic Edit -->
+              <a
+                href="portfolio.html"
+                class="reel-card"
+                aria-label="High-Energy Kinetic Edit - View in Portfolio"
+              >
+                <img
+                  src="thumb3.jpg"
+                  alt="High-Energy Kinetic Edit"
+                  class="reel-thumbnail-img"
+                />
+                <div class="reel-play-circle"><i class="fas fa-play"></i></div>
+                <div class="reel-play-overlay">
+                  <span class="reel-card-tag">Motion VFX • Kinetic</span>
+                  <h4 class="reel-card-title">High-Energy Kinetic Edit</h4>
+                </div>
+              </a>
+
+              <!-- Reel 4: Cinematic Brand Showcase -->
+              <a
+                href="portfolio.html"
+                class="reel-card"
+                aria-label="Cinematic Brand Showcase - View in Portfolio"
+              >
+                <img
+                  src="thumb4.jpg"
+                  alt="Cinematic Brand Showcase"
+                  class="reel-thumbnail-img"
+                />
+                <div class="reel-play-circle"><i class="fas fa-play"></i></div>
+                <div class="reel-play-overlay">
+                  <span class="reel-card-tag">Cinematic • Brand</span>
+                  <h4 class="reel-card-title">Cinematic Brand Showcase</h4>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+         FAQ SECTION ("YOUR QUESTIONS, ANSWERED")
+         ==================================================================== -->
+      <section class="section-wrapper" id="faq">
+        <div class="container">
+          <div class="section-header">
+            <span class="section-tag">FAQ</span>
+            <h2 class="section-title-cursive">Your Questions, Answered</h2>
+          </div>
+
+          <div class="faq-grid">
+            <!-- Left Contact Card -->
+            <div class="faq-contact-card">
+              <div class="faq-avatar-wrapper">
+                <img
+                  src="DP.png"
+                  alt="PEDITRO Editor Avatar"
+                  class="faq-avatar-img"
+                />
+                <span class="faq-avatar-status"></span>
+              </div>
+              <h3 class="faq-card-title">Have more questions?</h3>
+              <p class="faq-card-desc">
+                Drop me a direct message on Instagram to discuss your project or
+                video editing vision.
+              </p>
+              <a
+                href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-pill btn-primary"
+                style="width: 100%"
+              >
+                <span>Contact Me</span>
+              </a>
+
+              <!-- Contact Me Side Layout -->
+              <div class="faq-contact-side-layout">
+                <span class="faq-contact-side-badge">Contact Me:</span>
+                <div class="faq-contact-side-links">
+                  <a
+                    href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="faq-email-link"
+                  >
+                    <i class="fab fa-instagram"></i> Instagram:
+                    <span>@peditro684</span>
+                  </a>
+                  <a href="mailto:peditro684@gmail.com" class="faq-email-link">
+                    <i class="fas fa-envelope"></i> Email:
+                    <span>peditro684@gmail.com</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right Accordion List -->
+            <div class="accordion-wrapper" id="faqAccordion">
+              <div class="accordion-item actions">
+                <button class="accordion-trigger">
+                  <span>What types of videos do you edit?</span>
+                  <span class="accordion-icon"
+                    ><i class="fas fa-plus"></i
+                  ></span>
+                </button>
+                <div class="accordion-content" style="max-height: 200px">
+                  <p>
+                    I specialize in viral short-form content (Instagram Reels,
+                    YouTube Shorts), YouTube longform videos (educational,
+                    documentary, talking head), commercial brand films, and
+                    cinematic color grading.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger">
+                  <span>How fast is the turnaround time?</span>
+                  <span class="accordion-icon"
+                    ><i class="fas fa-plus"></i
+                  ></span>
+                </button>
+                <div class="accordion-content">
+                  <p>
+                    Most projects are delivered within 24–72 hours depending on
+                    length and complexity.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger">
+                  <span>How many revisions are included?</span>
+                  <span class="accordion-icon"
+                    ><i class="fas fa-plus"></i
+                  ></span>
+                </button>
+                <div class="accordion-content">
+                  <p>
+                    Each project includes up to 2 revision rounds to ensure
+                    you’re satisfied with the final result.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger">
+                  <span>What do you need to get started?</span>
+                  <span class="accordion-icon"
+                    ><i class="fas fa-plus"></i
+                  ></span>
+                </button>
+                <div class="accordion-content">
+                  <p>
+                    Raw footage, clear instructions, reference examples (if
+                    any), and your goal for the video.
+                  </p>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <button class="accordion-trigger">
+                  <span>Do you provide subtitles and motion graphics?</span>
+                  <span class="accordion-icon"
+                    ><i class="fas fa-plus"></i
+                  ></span>
+                </button>
+                <div class="accordion-content">
+                  <p>
+                    Yes. I offer subtitles, motion graphics, sound design, color
+                    grading, and smooth transitions..
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ====================================================================
+         "LET'S CONNECT" / FOOTER CTA SECTION
+         ==================================================================== -->
+      <section
+        class="section-wrapper"
+        id="contact"
+        style="padding-bottom: 30px"
+      >
+        <div class="container">
+          <div class="footer-cta-container">
+            <span class="footer-tag">— Available For Work —</span>
+            <h2 class="footer-giant-heading">Let's Connect</h2>
+            <p class="footer-subtext">
+              Feel free to contact me if you have any questions. I'm available
+              for new projects, channel retention audits, or just for chatting.
+            </p>
+
+            <div class="footer-cta-group">
+              <a
+                href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-pill btn-primary"
+                style="padding: 16px 38px; font-size: 1.05rem"
+              >
+                <i class="fab fa-instagram" style="font-size: 1.25rem"></i>
+                <span>Contact me: @peditro684</span>
+                <span class="arrow-icon">→</span>
+              </a>
+              <a
+                href="mailto:peditro684@gmail.com"
+                class="btn-pill btn-secondary"
+                style="padding: 16px 34px; font-size: 1.05rem"
+              >
+                <i class="fas fa-envelope" style="font-size: 1.15rem"></i>
+                <span>Email: peditro684@gmail.com</span>
+              </a>
+            </div>
+
+            <div class="footer-bottom-bar">
+              <div class="footer-copyright">© PEDITRO, 2026</div>
+
+              <div class="footer-socials">
+                <a
+                  href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="social-circle-btn"
+                  aria-label="Instagram"
+                  title="Instagram"
+                >
+                  <i class="fab fa-instagram"></i>
+                </a>
+                <a
+                  href="mailto:peditro684@gmail.com"
+                  class="social-circle-btn"
+                  aria-label="Email"
+                  title="Email"
+                >
+                  <i class="fas fa-envelope"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ======================================================================
+       INTERACTIVE VIDEO LIGHTBOX MODAL
+       ====================================================================== -->
+    <div class="video-modal-backdrop" id="videoModal" aria-hidden="true">
+      <div class="video-modal-container">
+        <button
+          class="video-modal-close-btn"
+          id="videoModalClose"
+          aria-label="Close Video Modal"
+        >
+          <i class="fas fa-times"></i>
+        </button>
+
+        <div class="video-modal-player-wrapper" id="videoModalPlayerWrapper">
+          <iframe
+            class="video-modal-iframe"
+            id="videoModalIframe"
+            src=""
+            allow="autoplay; encrypted-media; fullscreen"
+            allowfullscreen
+          ></iframe>
+          <video
+            class="video-modal-html5-player"
+            id="videoModalVideoPlayer"
+            controls
+            playsinline
+            style="
+              display: none;
+              width: 100%;
+              height: 100%;
+              object-fit: contain;
+              background: #000;
+            "
+          ></video>
+        </div>
+
+        <div class="video-modal-info">
+          <h3 class="video-modal-title" id="videoModalTitle">Project Title</h3>
+          <p class="video-modal-desc" id="videoModalDesc">
+            Project details and video editing description.
+          </p>
+          <div style="margin-top: 14px">
+            <a
+              href="https://www.instagram.com/peditro684?exln=aTIwYmNoMTU5Ym5l"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-pill btn-primary"
+              style="padding: 10px 24px; font-size: 0.9rem"
+            >
+              <i class="fab fa-instagram"></i>
+              <span>DM on Instagram to Start</span>
+              <span class="arrow-icon">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JavaScript Logic -->
+    <script src="script.js"></script>
+  </body>
+</html>
